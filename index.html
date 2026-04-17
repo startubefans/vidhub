@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Video Preview</title>
+    <style>
+        :root { --ph-orange: #ffa31a; --ph-black: #000; --ph-gray: #1b1b1b; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--ph-black); color: #fff; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+        .card { width: 100%; max-width: 400px; background: var(--ph-gray); border-radius: 12px; overflow: hidden; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        
+        .player { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; cursor: pointer; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .live { position: absolute; top: 10px; left: 10px; background: red; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; animation: blink 1.5s infinite; z-index: 10; }
+        .views { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 4px; font-size: 11px; display: flex; align-items: center; gap: 5px; z-index: 10; }
+        .eye-icon { width: 14px; height: 9px; border: 1px solid #fff; border-radius: 70% 10%; transform: rotate(45deg); position: relative; }
+        .eye-icon::after { content: ''; width: 4px; height: 4px; background: var(--ph-orange); border-radius: 50%; position: absolute; top: 1.5px; left: 1.5px; }
+        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .info { padding: 22px; }
+        .title { font-size: 18px; font-weight: bold; margin-bottom: 20px; line-height: 1.3; }
+        .btn { display: block; width: 100%; padding: 16px; border-radius: 6px; text-align: center; font-weight: 800; border: none; cursor: pointer; text-decoration: none; margin-bottom: 12px; font-size: 16px; transition: 0.2s; }
+        .btn-main { background: var(--ph-orange); color: #000; }
+        .btn-alt { background: #333; color: #fff; }
+        .btn:active { transform: scale(0.98); }
+
+        .footer { display: flex; justify-content: space-between; font-size: 11px; color: #888; border-top: 1px solid #333; padding-top: 12px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="player" onclick="goAd()">
+            <div class="live">🟢LIVE</div>
+            <div class="views"><div class="eye-icon"></div> 13,369 <span style="color:var(--ph-orange)">Watching</span></div>
+            
+            <!-- Masukkan link .mp4 dari Videy/Aceimg di sini -->
+            <video muted loop autoplay playsinline>
+                <source src="https://cdn.videy.co/RMFG9XfQ1.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="info">
+            <h1 class="title">Nobody expected her to do THIS in front of everyone... Watch the uncut footage before it's banned! 😳🔥</h1>
+            
+            <button class="btn btn-main" onclick="goAd()">▶ WATCH FULL VIDEO (HD)</button>
+            <button class="btn btn-alt" onclick="goAd()">🎬 SERVER 2 (MIRROR)</button>
+
+            <div class="footer">
+                <span>Rating: <b style="color:var(--ph-orange)">99.6%</b></span>
+                <span>Views: <b>6.9M</b></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hasil encode Anda (1x encode)
+        const secret = "aHR0cHM6Ly9zZWVuaW1wbGllZGR1bXAuY29tL3UwaXp4N3RkdDI/a2V5PTJkYTkxYjlkMWY3OGFjNTZjNmFlNjRiMzQ3MjU4NjU1";
+
+        function goAd() {
+            try {
+                // Decode link Adsterra
+                const target = atob(secret);
+                
+                // Gunakan noreferrer untuk melindungi akun dari bot FB
+                const win = window.open(target, '_blank', 'noopener,noreferrer');
+                
+                // Fallback jika popup diblokir browser
+                if (!win || win.closed || typeof win.closed == 'undefined') { 
+                    window.location.href = target;
+                }
+            } catch (e) {
+                console.error("Redirect error");
+            }
+        }
+    </script>
+</body>
+</html>
